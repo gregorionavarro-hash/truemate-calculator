@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Estate Tax - Non-Resident Alien</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        h2 {
+            color: #764ba2;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 20px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 5px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .btn-calculate {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.2s;
+        }
+        
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+        }
+        
+        .results {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .result-row:last-child {
+            border-bottom: none;
+        }
+        
+        .result-label {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .result-value {
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 5px solid #ffc107;
+        }
+        
+        .success {
+            background: #d4edda;
+            border-left-color: #28a745;
+        }
+        
+        .danger {
+            background: #f8d7da;
+            border-left-color: #dc3545;
+        }
+        
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .comparison-box {
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .without-ilit {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+        }
+        
+        .with-ilit {
+            background: #d4edda;
+            border: 2px solid #28a745;
+        }
+        
+        .big-number {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .savings {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .savings .amount {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        @media (max-width: 600px) {
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧮 Calculadora Estate Tax</h1>
+        <p class="subtitle">Para Non-Resident Aliens (Visa E-2) - Basado en IRS Publication 519</p>
+        
+        <h2>📊 Ingresa Tus Activos en USA</h2>
+        
+        <div class="input-group">
+            <label for="negocio1">Negocio 1 (Newcomers LLC):</label>
+            <input type="number" id="negocio1" value="400000" step="1000">
+        </div>
+        
+        <div class="input-group">
+            <label for="negocio2">Negocio 2 (Truemategroup LLC):</label>
+            <input type="number" id="negocio2" value="400000" step="1000">
+        </div>
+        
+        <div class="input-group">
+            <label for="casa">Casa / Propiedad:</label>
+            <input type="number" id="casa" value="250000" step="1000">
+        </div>
+        
+        <div class="input-group">
+            <label for="cuentas">Cuentas Bancarias:</label>
+            <input type="number" id="cuentas" value="50000" step="1000">
+        </div>
+        
+        <div class="input-group">
+            <label for="seguro">Seguro de Vida (si eres owner):</label>
+            <input type="number" id="seguro" value="1000000" step="1000">
+        </div>
+        
+        <button class="btn-calculate" onclick="calcular()">Calcular Estate Tax</button>
+        
+        <div id="resultados" style="display: none;">
+            <h2>📋 Resultados del Cálculo</h2>
+            
+            <div class="results">
+                <div class="result-row">
+                    <span class="result-label">Total Activos (Gross Estate):</span>
+                    <span class="result-value" id="totalActivos">$0</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Exención (Non-Resident Alien):</span>
+                    <span class="result-value">-$60,000</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Taxable Estate:</span>
+                    <span class="result-value" id="taxableEstate">$0</span>
+                </div>
+            </div>
+            
+            <div class="highlight danger">
+                <div class="result-row">
+                    <span class="result-label">💰 ESTATE TAX A PAGAR:</span>
+                    <span class="result-value" id="estateTax" style="font-size: 24px; color: #dc3545;">$0</span>
+                </div>
+            </div>
+            
+            <div class="results">
+                <div class="result-row">
+                    <span class="result-label">Net para Fabiola/Jhanna:</span>
+                    <span class="result-value" id="netAmount">$0</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Pérdida en Impuestos:</span>
+                    <span class="result-value" id="taxLoss" style="color: #dc3545;">$0</span>
+                </div>
+            </div>
+            
+            <h2>💡 Con ILIT (Seguro Fuera del Estate)</h2>
+            
+            <div class="comparison">
+                <div class="comparison-box without-ilit">
+                    <h3>❌ SIN ILIT</h3>
+                    <div class="big-number" id="withoutILIT" style="color: #dc3545;">$0</div>
+                    <p>Incluye seguro en estate</p>
+                </div>
+                
+                <div class="comparison-box with-ilit">
+                    <h3>✅ CON ILIT</h3>
+                    <div class="big-number" id="withILIT" style="color: #28a745;">$0</div>
+                    <p>Seguro excluido del estate</p>
+                </div>
+            </div>
+            
+            <div class="savings">
+                <h3>🎯 AHORRO TOTAL CON ILIT</h3>
+                <div class="amount" id="savings">$0</div>
+                <p>Esto es dinero adicional que Fabiola y Jhanna recibirían</p>
+            </div>
+            
+            <div class="highlight success">
+                <strong>📌 Nota Importante:</strong> Esta calculadora usa las tablas oficiales del IRS (IRC §2001). 
+                Los cálculos son aproximados y deben ser verificados con un CPA o abogado especializado en estate planning para non-citizens.
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function formatCurrency(amount) {
+            return '$' + amount.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+        }
+        
+        function calculateEstateTax(taxableAmount) {
+            // Tabla oficial del IRS - IRC §2001(c)
+            if (taxableAmount <= 0) return 0;
+            if (taxableAmount <= 10000) return taxableAmount * 0.18;
+            if (taxableAmount <= 20000) return 1800 + (taxableAmount - 10000) * 0.20;
+            if (taxableAmount <= 40000) return 3800 + (taxableAmount - 20000) * 0.22;
+            if (taxableAmount <= 60000) return 8200 + (taxableAmount - 40000) * 0.24;
+            if (taxableAmount <= 80000) return 13000 + (taxableAmount - 60000) * 0.26;
+            if (taxableAmount <= 100000) return 18200 + (taxableAmount - 80000) * 0.28;
+            if (taxableAmount <= 150000) return 23800 + (taxableAmount - 100000) * 0.30;
+            if (taxableAmount <= 250000) return 38800 + (taxableAmount - 150000) * 0.32;
+            if (taxableAmount <= 500000) return 70800 + (taxableAmount - 250000) * 0.34;
+            if (taxableAmount <= 750000) return 155800 + (taxableAmount - 500000) * 0.37;
+            if (taxableAmount <= 1000000) return 248300 + (taxableAmount - 750000) * 0.39;
+            return 345800 + (taxableAmount - 1000000) * 0.40;
+        }
+        
+        function calcular() {
+            // Obtener valores
+            const negocio1 = parseFloat(document.getElementById('negocio1').value) || 0;
+            const negocio2 = parseFloat(document.getElementById('negocio2').value) || 0;
+            const casa = parseFloat(document.getElementById('casa').value) || 0;
+            const cuentas = parseFloat(document.getElementById('cuentas').value) || 0;
+            const seguro = parseFloat(document.getElementById('seguro').value) || 0;
+            
+            // Calcular totales
+            const totalActivos = negocio1 + negocio2 + casa + cuentas + seguro;
+            const exencion = 60000;
+            const taxableEstate = Math.max(0, totalActivos - exencion);
+            const estateTax = calculateEstateTax(taxableEstate);
+            const netAmount = totalActivos - estateTax;
+            const taxLossPercent = ((estateTax / totalActivos) * 100).toFixed(1);
+            
+            // Calcular con ILIT
+            const activosSinSeguro = negocio1 + negocio2 + casa + cuentas;
+            const taxableConILIT = Math.max(0, activosSinSeguro - exencion);
+            const taxConILIT = calculateEstateTax(taxableConILIT);
+            const netConILIT = activosSinSeguro - taxConILIT + seguro; // Seguro viene del ILIT, libre
+            
+            const ahorro = netConILIT - netAmount;
+            
+            // Mostrar resultados
+            document.getElementById('totalActivos').textContent = formatCurrency(totalActivos);
+            document.getElementById('taxableEstate').textContent = formatCurrency(taxableEstate);
+            document.getElementById('estateTax').textContent = formatCurrency(estateTax);
+            document.getElementById('netAmount').textContent = formatCurrency(netAmount);
+            document.getElementById('taxLoss').textContent = formatCurrency(estateTax) + ' (' + taxLossPercent + '%)';
+            
+            document.getElementById('withoutILIT').textContent = formatCurrency(netAmount);
+            document.getElementById('withILIT').textContent = formatCurrency(netConILIT);
+            document.getElementById('savings').textContent = formatCurrency(ahorro);
+            
+            // Mostrar sección de resultados
+            document.getElementById('resultados').style.display = 'block';
+            
+            // Scroll a resultados
+            document.getElementById('resultados').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Calcular automáticamente al cargar
+        window.onload = function() {
+            calcular();
+        };
+    </script>
+</body>
+</html>
