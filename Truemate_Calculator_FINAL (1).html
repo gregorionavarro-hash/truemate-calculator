@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Estate Tax - Truemate Insurance Financial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 50%, #c53030 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .header {
+            text-align: center;
+            background: white;
+            padding: 30px 20px;
+            border-radius: 15px 15px 0 0;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-bottom: 5px solid #c53030;
+        }
+        
+        .company-name {
+            font-size: 36px;
+            font-weight: bold;
+            color: #1e3a5f;
+            margin-bottom: 10px;
+        }
+        
+        .company-name .true {
+            color: #1e3a5f;
+        }
+        
+        .company-name .mate {
+            color: #c53030;
+        }
+        
+        .tagline {
+            color: #1e3a5f;
+            font-size: 16px;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #1e3a5f;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        h2 {
+            color: #c53030;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-size: 22px;
+            border-bottom: 3px solid #1e3a5f;
+            padding-bottom: 8px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        .client-info {
+            background: #f7fafc;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2d3748;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s;
+            background: white;
+        }
+        
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #1e3a5f;
+            box-shadow: 0 0 0 3px rgba(30, 58, 95, 0.1);
+        }
+        
+        .info-text {
+            font-size: 12px;
+            color: #718096;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        .btn-calculate {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #1e3a5f 0%, #c53030 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(197, 48, 48, 0.3);
+        }
+        
+        .btn-calculate:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(197, 48, 48, 0.4);
+        }
+        
+        .btn-print {
+            width: 100%;
+            padding: 15px;
+            background: white;
+            color: #1e3a5f;
+            border: 2px solid #1e3a5f;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+        
+        .btn-print:hover {
+            background: #1e3a5f;
+            color: white;
+        }
+        
+        .results {
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border-radius: 12px;
+            border: 3px solid #1e3a5f;
+        }
+        
+        .client-header {
+            background: #1e3a5f;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+        
+        .client-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .client-date {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .result-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .result-row:last-child {
+            border-bottom: none;
+        }
+        
+        .result-label {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 15px;
+        }
+        
+        .result-value {
+            color: #1e3a5f;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 6px solid #c53030;
+        }
+        
+        .success-box {
+            background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
+            border-left-color: #38a169;
+        }
+        
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .comparison-card {
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: transform 0.3s;
+        }
+        
+        .comparison-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .without-ilit {
+            background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+            border: 3px solid #c53030;
+        }
+        
+        .with-ilit {
+            background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
+            border: 3px solid #38a169;
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+        
+        .big-number {
+            font-size: 36px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        
+        .card-subtitle {
+            font-size: 13px;
+            color: #4a5568;
+            margin-top: 10px;
+        }
+        
+        .savings-banner {
+            background: linear-gradient(135deg, #38a169 0%, #48bb78 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 30px 0;
+            box-shadow: 0 6px 20px rgba(56, 161, 105, 0.4);
+        }
+        
+        .savings-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .savings-amount {
+            font-size: 52px;
+            font-weight: bold;
+            margin: 15px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .savings-text {
+            font-size: 16px;
+            opacity: 0.95;
+            margin-top: 10px;
+        }
+        
+        .disclaimer {
+            background: #edf2f7;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border-left: 4px solid #1e3a5f;
+        }
+        
+        .disclaimer-title {
+            font-weight: bold;
+            color: #1e3a5f;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .disclaimer-text {
+            font-size: 13px;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 25px;
+            background: #1e3a5f;
+            color: white;
+            border-radius: 12px;
+        }
+        
+        .footer-contact {
+            font-size: 15px;
+            margin: 8px 0;
+        }
+        
+        .footer-contact strong {
+            color: #fc8181;
+        }
+        
+        .special-note {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .special-note-title {
+            font-weight: bold;
+            color: #856404;
+            margin-bottom: 8px;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .btn-calculate, .btn-print {
+                display: none;
+            }
+            
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .input-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .company-name {
+                font-size: 28px;
+            }
+            
+            .big-number {
+                font-size: 28px;
+            }
+            
+            .savings-amount {
+                font-size: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="company-name">
+            <span class="true">True</span><span class="mate">mate</span>
+        </div>
+        <div class="tagline">
+            INSURANCE FINANCIAL
+        </div>
+        <p style="margin-top: 15px; color: #4a5568; font-size: 14px;">
+            <strong>Estate Tax Planning Calculator</strong><br>
+            Especialistas en Planificación Patrimonial para No-Ciudadanos
+        </p>
+    </div>
+    
+    <div class="container">
+        <h1>🧮 Calculadora Profesional de Estate Tax</h1>
+        <p class="subtitle">
+            Herramienta especializada para clientes con Visa E-2, inversionistas extranjeros<br>
+            y residentes no-ciudadanos con activos en Estados Unidos
+        </p>
+        
+        <div class="client-info">
+            <h2>👤 Información del Cliente</h2>
+            
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="clientName">Nombre Completo del Cliente:</label>
+                    <input type="text" id="clientName" placeholder="Ej: Juan Pérez García">
+                </div>
+                
+                <div class="input-group">
+                    <label for="visaStatus">Estatus Migratorio:</label>
+                    <select id="visaStatus">
+                        <option value="E-2">Visa E-2 (Inversionista)</option>
+                        <option value="E-1">Visa E-1 (Comerciante)</option>
+                        <option value="L-1">Visa L-1 (Transferencia)</option>
+                        <option value="H-1B">Visa H-1B (Trabajo)</option>
+                        <option value="TPS">TPS / Parole / DACA</option>
+                        <option value="Asylum">Asilo Pendiente</option>
+                        <option value="Other">Otro / No residente</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="spouseName">Nombre del Cónyuge (opcional):</label>
+                    <input type="text" id="spouseName" placeholder="Ej: María López">
+                </div>
+                
+                <div class="input-group">
+                    <label for="spouseStatus">Estatus del Cónyuge:</label>
+                    <select id="spouseStatus">
+                        <option value="Non-Citizen">No-Ciudadano (Visa derivada)</option>
+                        <option value="Citizen">Ciudadano Estadounidense</option>
+                        <option value="GreenCard">Residente Permanente (Green Card)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label for="beneficiaryName">Beneficiarios Principales:</label>
+                <input type="text" id="beneficiaryName" placeholder="Ej: Ana Pérez López, Carlos Pérez López">
+            </div>
+            
+            <div class="input-group">
+                <label for="yearsInUSA">¿Cuántos años lleva viviendo en USA sin salir?:</label>
+                <input type="number" id="yearsInUSA" value="0" min="0" max="50">
+                <p class="info-text">Esta información ayuda a determinar si podría calificar como residente para estate tax</p>
+            </div>
+        </div>
+        
+        <h2>🏢 Activos Comerciales</h2>
+        
+        <div class="input-group">
+            <label for="business1Name">Nombre del Negocio #1:</label>
+            <input type="text" id="business1Name" placeholder="Ej: ABC Corporation LLC">
+        </div>
+        
+        <div class="input-group">
+            <label for="business1Value">Valor del Negocio #1:</label>
+            <input type="number" id="business1Value" value="0" step="10000">
+            <p class="info-text">Valor justo de mercado estimado del negocio</p>
+        </div>
+        
+        <div class="input-group">
+            <label for="business2Name">Nombre del Negocio #2 (Opcional):</label>
+            <input type="text" id="business2Name" placeholder="Ej: XYZ Services LLC">
+        </div>
+        
+        <div class="input-group">
+            <label for="business2Value">Valor del Negocio #2:</label>
+            <input type="number" id="business2Value" value="0" step="10000">
+        </div>
+        
+        <h2>🏠 Bienes Raíces</h2>
+        
+        <div class="input-group">
+            <label for="propertyAddress">Dirección de Propiedad Principal:</label>
+            <input type="text" id="propertyAddress" placeholder="Ej: 123 Main Street, Orlando, FL 32801">
+        </div>
+        
+        <div class="input-group">
+            <label for="propertyValue">Valor de Propiedad(es):</label>
+            <input type="number" id="propertyValue" value="0" step="10000">
+            <p class="info-text">Incluye residencia principal y propiedades de inversión</p>
+        </div>
+        
+        <h2>💰 Activos Financieros</h2>
+        
+        <div class="input-row">
+            <div class="input-group">
+                <label for="bankAccounts">Cuentas Bancarias:</label>
+                <input type="number" id="bankAccounts" value="0" step="5000">
+                <p class="info-text">Checking, savings, money market</p>
+            </div>
+            
+            <div class="input-group">
+                <label for="investments">Inversiones:</label>
+                <input type="number" id="investments" value="0" step="5000">
+                <p class="info-text">Stocks, bonds, mutual funds</p>
+            </div>
+        </div>
+        
+        <h2>🛡️ Seguro de Vida</h2>
+        
+        <div class="input-group">
+            <label for="lifeInsurance">Seguro de Vida (Death Benefit):</label>
+            <input type="number" id="lifeInsurance" value="0" step="50000">
+            <p class="info-text">⚠️ Solo incluir si el cliente es OWNER de la póliza</p>
+        </div>
+        
+        <div class="input-group">
+            <label for="insuranceOwner">¿Quién es owner de la póliza?:</label>
+            <select id="insuranceOwner">
+                <option value="client">Cliente (se incluye en estate)</option>
+                <option value="ilit">ILIT / Trust Irrevocable (NO se incluye)</option>
+                <option value="spouse">Cónyuge</option>
+                <option value="other">Otro</option>
+            </select>
+        </div>
+        
+        <button class="btn-calculate" onclick="calcular()">
+            📊 Calcular Estate Tax y Generar Reporte
+        </button>
+        
+        <div id="resultados" style="display: none;"></div>
+    </div>
+    
+    <script>
+        function formatCurrency(amount) {
+            return '$' + amount.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+        }
+        
+        function formatPercent(percent) {
+            return percent.toFixed(1) + '%';
+        }
+        
+        function calculateEstateTax(taxableAmount) {
+            if (taxableAmount <= 0) return 0;
+            if (taxableAmount <= 10000) return taxableAmount * 0.18;
+            if (taxableAmount <= 20000) return 1800 + (taxableAmount - 10000) * 0.20;
+            if (taxableAmount <= 40000) return 3800 + (taxableAmount - 20000) * 0.22;
+            if (taxableAmount <= 60000) return 8200 + (taxableAmount - 40000) * 0.24;
+            if (taxableAmount <= 80000) return 13000 + (taxableAmount - 60000) * 0.26;
+            if (taxableAmount <= 100000) return 18200 + (taxableAmount - 80000) * 0.28;
+            if (taxableAmount <= 150000) return 23800 + (taxableAmount - 100000) * 0.30;
+            if (taxableAmount <= 250000) return 38800 + (taxableAmount - 150000) * 0.32;
+            if (taxableAmount <= 500000) return 70800 + (taxableAmount - 250000) * 0.34;
+            if (taxableAmount <= 750000) return 155800 + (taxableAmount - 500000) * 0.37;
+            if (taxableAmount <= 1000000) return 248300 + (taxableAmount - 750000) * 0.39;
+            return 345800 + (taxableAmount - 1000000) * 0.40;
+        }
+        
+        function calcular() {
+            const clientName = document.getElementById('clientName').value || 'Cliente';
+            const visaStatus = document.getElementById('visaStatus').value;
+            const spouseName = document.getElementById('spouseName').value || 'N/A';
+            const beneficiaryName = document.getElementById('beneficiaryName').value || 'Beneficiarios';
+            const yearsInUSA = parseFloat(document.getElementById('yearsInUSA').value) || 0;
+            
+            const business1Value = parseFloat(document.getElementById('business1Value').value) || 0;
+            const business2Value = parseFloat(document.getElementById('business2Value').value) || 0;
+            const propertyValue = parseFloat(document.getElementById('propertyValue').value) || 0;
+            const bankAccounts = parseFloat(document.getElementById('bankAccounts').value) || 0;
+            const investments = parseFloat(document.getElementById('investments').value) || 0;
+            const lifeInsurance = parseFloat(document.getElementById('lifeInsurance').value) || 0;
+            const insuranceOwner = document.getElementById('insuranceOwner').value;
+            
+            const totalBusinesses = business1Value + business2Value;
+            const totalProperty = propertyValue;
+            const totalFinancial = bankAccounts + investments;
+            const includeInsurance = insuranceOwner === 'client';
+            const insuranceInEstate = includeInsurance ? lifeInsurance : 0;
+            
+            const grossEstate = totalBusinesses + totalProperty + totalFinancial + insuranceInEstate;
+            const exemption = 60000;
+            const taxableEstate = Math.max(0, grossEstate - exemption);
+            const estateTax = calculateEstateTax(taxableEstate);
+            const netToBeneficiaries = grossEstate - estateTax;
+            const taxPercent = grossEstate > 0 ? (estateTax / grossEstate) * 100 : 0;
+            
+            const assetsNoInsurance = totalBusinesses + totalProperty + totalFinancial;
+            const taxableWithILIT = Math.max(0, assetsNoInsurance - exemption);
+            const taxWithILIT = calculateEstateTax(taxableWithILIT);
+            const netWithILIT = assetsNoInsurance - taxWithILIT + lifeInsurance;
+            const savings = netWithILIT - netToBeneficiaries;
+            
+            const showDualScenario = yearsInUSA >= 3 && (visaStatus === 'E-2' || visaStatus === 'E-1' || visaStatus === 'L-1');
+            
+            let resultsHTML = `
+                <div class="results">
+                    <div class="client-header">
+                        <div class="client-name">${clientName}</div>
+                        <div class="client-date">Análisis generado: ${new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+                        <div class="client-date">Estatus: ${visaStatus} | Cónyuge: ${spouseName}</div>
+                        ${yearsInUSA > 0 ? `<div class="client-date">Años en USA: ${yearsInUSA}</div>` : ''}
+                    </div>`;
+            
+            if (showDualScenario) {
+                resultsHTML += `
+                    <div class="special-note">
+                        <div class="special-note-title">⚠️ IMPORTANTE: Análisis de Dos Escenarios</div>
+                        <p>Como usted lleva <strong>${yearsInUSA}+ años viviendo continuamente en USA</strong>, podría argumentar ser RESIDENTE para estate tax purposes. Esto le daría una exención de <strong>$13,990,000</strong> en lugar de $60,000.</p>
+                        <p style="margin-top: 8px;"><strong>Abajo calculamos ambos escenarios.</strong> Le recomendamos consultar con un abogado especializado para determinar su clasificación correcta.</p>
+                    </div>`;
+            }
+            
+            resultsHTML += `
+                    <h2>📊 Resumen de Activos</h2>
+                    <div class="result-section">
+                        <div class="result-row">
+                            <span class="result-label">Negocios:</span>
+                            <span class="result-value">${formatCurrency(totalBusinesses)}</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Bienes Raíces:</span>
+                            <span class="result-value">${formatCurrency(totalProperty)}</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Activos Financieros:</span>
+                            <span class="result-value">${formatCurrency(totalFinancial)}</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Seguro de Vida (${includeInsurance ? 'incluido' : 'NO incluido'}):</span>
+                            <span class="result-value">${formatCurrency(insuranceInEstate)}</span>
+                        </div>
+                        <div class="result-row" style="border-top: 3px solid #1e3a5f; padding-top: 15px; margin-top: 10px;">
+                            <span class="result-label" style="font-size: 18px;">GROSS ESTATE TOTAL:</span>
+                            <span class="result-value" style="font-size: 20px; color: #c53030;">${formatCurrency(grossEstate)}</span>
+                        </div>
+                    </div>
+                    
+                    <h2>💸 Escenario Conservador (No-Residente - $60k exención)</h2>
+                    <div class="result-section">
+                        <div class="result-row">
+                            <span class="result-label">Gross Estate:</span>
+                            <span class="result-value">${formatCurrency(grossEstate)}</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Exención (Non-Resident Alien):</span>
+                            <span class="result-value" style="color: #38a169;">-$60,000</span>
+                        </div>
+                        <div class="result-row" style="background: #fff5f5;">
+                            <span class="result-label">TAXABLE ESTATE:</span>
+                            <span class="result-value">${formatCurrency(taxableEstate)}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <div class="result-row">
+                            <span class="result-label" style="font-size: 20px;">💰 ESTATE TAX A PAGAR:</span>
+                            <span class="result-value" style="font-size: 26px; color: #c53030;">${formatCurrency(estateTax)}</span>
+                        </div>
+                        <div style="text-align: center; margin-top: 15px; color: #742a2a; font-weight: 600;">
+                            Pérdida: ${formatPercent(taxPercent)} del valor total
+                        </div>
+                    </div>
+                    
+                    <div class="result-section">
+                        <div class="result-row" style="border-top: 3px solid #38a169; padding-top: 15px; margin-top: 10px;">
+                            <span class="result-label" style="font-size: 18px;">NET PARA BENEFICIARIOS:</span>
+                            <span class="result-value" style="font-size: 20px; color: #38a169;">${formatCurrency(netToBeneficiaries)}</span>
+                        </div>
+                    </div>`;
+            
+            if (showDualScenario && grossEstate > 60000) {
+                const residentExemption = 13990000;
+                const taxableAsResident = Math.max(0, grossEstate - residentExemption);
+                const taxAsResident = calculateEstateTax(taxableAsResident);
+                const netAsResident = grossEstate - taxAsResident;
+                const potentialSavings = netAsResident - netToBeneficiaries;
+                
+                resultsHTML += `
+                    <h2 style="color: #38a169;">✅ Escenario Optimista (Residente - $13.99M exención)</h2>
+                    <div class="special-note success-box" style="border-left-color: #38a169;">
+                        <div class="special-note-title" style="color: #22543d;">Si logra clasificar como RESIDENTE para estate tax:</div>
+                        <div class="result-section" style="margin-top: 15px;">
+                            <div class="result-row">
+                                <span class="result-label">Gross Estate:</span>
+                                <span class="result-value">${formatCurrency(grossEstate)}</span>
+                            </div>
+                            <div class="result-row">
+                                <span class="result-label">Exención (Residente):</span>
+                                <span class="result-value" style="color: #38a169;">-$13,990,000</span>
+                            </div>
+                            <div class="result-row">
+                                <span class="result-label">Taxable Estate:</span>
+                                <span class="result-value">${formatCurrency(taxableAsResident)}</span>
+                            </div>
+                            <div class="result-row">
+                                <span class="result-label">Estate Tax:</span>
+                                <span class="result-value">${formatCurrency(taxAsResident)}</span>
+                            </div>
+                            <div class="result-row" style="border-top: 3px solid #38a169; padding-top: 15px; margin-top: 10px;">
+                                <span class="result-label" style="font-size: 18px;">NET PARA BENEFICIARIOS:</span>
+                                <span class="result-value" style="font-size: 20px; color: #38a169;">${formatCurrency(netAsResident)}</span>
+                            </div>
+                        </div>
+                        <div style="text-align: center; margin-top: 20px; padding: 15px; background: white; border-radius: 8px;">
+                            <div style="font-size: 16px; font-weight: bold; color: #22543d;">AHORRO POTENCIAL:</div>
+                            <div style="font-size: 36px; font-weight: bold; color: #38a169; margin: 10px 0;">${formatCurrency(potentialSavings)}</div>
+                            <p style="font-size: 14px; color: #4a5568;">Si logra argumentar residencia fiscal, su familia recibiría este monto adicional</p>
+                        </div>
+                    </div>
+                    
+                    <div class="disclaimer">
+                        <div class="disclaimer-title">📋 Recomendación para ${clientName}:</div>
+                        <div class="disclaimer-text">
+                            La diferencia entre ser clasificado como no-residente vs residente es de <strong>${formatCurrency(potentialSavings)}</strong>. 
+                            Dado que lleva ${yearsInUSA} años en USA, <strong>vale la pena consultar con un abogado especializado</strong> en estate planning para no-ciudadanos 
+                            para determinar si puede argumentar "domicilio permanente" en USA y calificar como residente para estate tax purposes.
+                        </div>
+                    </div>`;
+            }
+            
+            if (lifeInsurance > 0 && includeInsurance) {
+                resultsHTML += `
+                    <h2>💡 Estrategia con ILIT (Irrevocable Life Insurance Trust)</h2>
+                    
+                    <div class="comparison">
+                        <div class="comparison-card without-ilit">
+                            <div class="card-title">❌ ESCENARIO ACTUAL</div>
+                            <div class="card-subtitle">Sin planificación ILIT</div>
+                            <div class="big-number" style="color: #c53030;">${formatCurrency(netToBeneficiaries)}</div>
+                            <div class="card-subtitle">Net a beneficiarios</div>
+                        </div>
+                        
+                        <div class="comparison-card with-ilit">
+                            <div class="card-title">✅ CON ILIT</div>
+                            <div class="card-subtitle">Seguro fuera del estate</div>
+                            <div class="big-number" style="color: #38a169;">${formatCurrency(netWithILIT)}</div>
+                            <div class="card-subtitle">Net a beneficiarios</div>
+                        </div>
+                    </div>
+                    
+                    <div class="savings-banner">
+                        <div class="savings-title">🎯 AHORRO TOTAL CON ESTRATEGIA ILIT</div>
+                        <div class="savings-amount">${formatCurrency(savings)}</div>
+                        <div class="savings-text">
+                            Dinero adicional que recibirá ${beneficiaryName}<br>
+                            al implementar estrategia de ILIT correctamente
+                        </div>
+                    </div>
+                    
+                    <div class="result-section">
+                        <h3 style="color: #1e3a5f; margin-bottom: 15px;">📋 Detalles del Cálculo con ILIT:</h3>
+                        <div class="result-row">
+                            <span class="result-label">Activos sin seguro:</span>
+                            <span class="result-value">${formatCurrency(assetsNoInsurance)}</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Estate tax reducido:</span>
+                            <span class="result-value">${formatCurrency(taxWithILIT)}</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Seguro del ILIT (tax-free):</span>
+                            <span class="result-value" style="color: #38a169;">${formatCurrency(lifeInsurance)}</span>
+                        </div>
+                        <div class="result-row" style="border-top: 3px solid #38a169;">
+                            <span class="result-label">Total con ILIT:</span>
+                            <span class="result-value" style="color: #38a169;">${formatCurrency(netWithILIT)}</span>
+                        </div>
+                    </div>`;
+            }
+            
+            resultsHTML += `
+                    <div class="disclaimer">
+                        <div class="disclaimer-title">⚠️ Información Legal Importante</div>
+                        <div class="disclaimer-text">
+                            <strong>Fuentes:</strong> Esta calculadora utiliza las tablas oficiales del IRS (Internal Revenue Code §2001 y §2101), 
+                            IRS Publication 519 para non-resident aliens, y Form 706-NA instructions.<br><br>
+                            
+                            <strong>Limitaciones:</strong> Los cálculos son estimados y para propósitos educativos. 
+                            No constituyen asesoría legal o fiscal. Cada situación es única y puede tener factores adicionales 
+                            como tratados fiscales internacionales, QDOT para cónyuges no-ciudadanos, debt-financed property, etc.<br><br>
+                            
+                            <strong>Recomendación:</strong> Se recomienda consultar con un abogado especializado en estate planning 
+                            para non-citizens y un CPA con experiencia en impuestos internacionales antes de tomar decisiones.<br><br>
+                            
+                            <strong>Actualización:</strong> Exención de $60,000 para non-resident aliens establecida en 1976 
+                            y no indexada por inflación. Exención de $13,990,000 para residentes (2025). Rates de estate tax del 18% al 40% según IRC §2001(c).
+                        </div>
+                    </div>
+                    
+                    <button class="btn-print" onclick="window.print()">
+                        🖨️ Imprimir / Guardar como PDF
+                    </button>
+                </div>
+                
+                <div class="footer">
+                    <h3 style="margin-bottom: 15px;">📞 Contáctanos para Consulta Personalizada</h3>
+                    <div class="footer-contact">
+                        <strong>Truemate Insurance Financial</strong>
+                    </div>
+                    <div class="footer-contact">
+                        Especialistas en Estate Planning para Inversionistas E-2
+                    </div>
+                    <div class="footer-contact">
+                        📧 Email: <strong>planning@truemateinsurance.com</strong>
+                    </div>
+                    <div class="footer-contact">
+                        📱 Teléfono: <strong>(484) 456-9465</strong>
+                    </div>
+                    <div style="margin-top: 15px; font-size: 13px; opacity: 0.9;">
+                        Sirviendo a la comunidad hispana en Florida desde 2015
+                    </div>
+                </div>`;
+            
+            document.getElementById('resultados').innerHTML = resultsHTML;
+            document.getElementById('resultados').style.display = 'block';
+            document.getElementById('resultados').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
